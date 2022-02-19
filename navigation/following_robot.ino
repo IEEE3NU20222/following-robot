@@ -5,7 +5,9 @@
 #include<NewPing.h>
 
 
-// NOTE DAWG: YOUR VARIABLE DEFINTIONS ALL OVER THE PLACEEEE
+// NOTE : YOUR VARIABLE DEFINTIONS ALL OVER THE PLACEEEE
+// need: pins for each sensor and motor pins 
+// have not tested yet
 
 
 // define which pins match the tigger and echo, I just have values here rn
