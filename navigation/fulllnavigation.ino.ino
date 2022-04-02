@@ -13,13 +13,13 @@ using namespace std;
   int motion = 0;
 
   // trigger and echo pins for front ultrasonic sensors
-  const int trigFL = 2;
-  const int echoFL = 3;
-  const int trigFR = 4;
-  const int echoFR = 5;
+  const int trigFR = 2;
+  const int echoFR = A0;
+  const int trigFL = 4;
+  const int echoFL = 5;
 
   // trigger and echo pins for side ultrasonic sensors
-  const int trigSL = 7;
+  const int trigSL = 7;;
   const int echoSL = 6;
   const int trigSR = 8;
   const int echoSR = 9;
@@ -45,11 +45,11 @@ int in2 = 12;
 //Motor B
 
 int enB = 3;
-int in3 = 5;
-int in4 = 6;
+int in3 = A1;
+int in4 = A2;
 
   //pin for LED
-  #define LEDPin 13
+  #define LEDPin A3
 
   //////////// Variables
 
@@ -62,10 +62,10 @@ int in4 = 6;
   // store difference between two sensor values
   float diffS, absDiffS;
 
-  //PIR sensor
+  //PIR sensor 
   int see_val;
 
-///////----- function declarations
+///////----- function declarations 
 
 void Lost_sequence();
 
@@ -176,10 +176,16 @@ void loop() {
   }
 
   // output for side ultrasonic sensors
-  Serial.print("Distance (Right): ");
+  Serial.print("Distance (Side Right): ");
   Serial.println(distSR);
-  Serial.print("Distance (Left): ");
+  Serial.print("Distance (Side Left): ");
   Serial.println(distSL);
+
+  // output for side ultrasonic sensors
+  Serial.print("Distance (Front Right): ");
+  Serial.println(distFR);
+  Serial.print("Distance (Front Left): ");
+  Serial.println(distFL);
 
   // debugging for PIR sensor
   if (motion == HIGH) {
@@ -214,7 +220,7 @@ void loop() {
 
 
   //check the difference between two sensor readings
-  diffS = (distSR-distSL);
+  diffS = (distFR-distFL);
   absDiffS = abs(diffS);
 
 
@@ -226,7 +232,7 @@ void loop() {
     Lost_sequence();
     lost();
   }
-
+ 
 
   // i could make notification a light going off
 
@@ -250,10 +256,10 @@ void loop() {
 
 
     //while the difference betwwen the sensors is *sufficiently* small, move forward
-    while (diffS <=15) {
+    if(absDiffS <=7) {
       One();
       // keep time using millis or use some counter?
-    Serial.print("forwarddd ");
+    Serial.print("forward after while ");
     }
 
     //if distance to the right sensor is greater, left turn to get values equal
@@ -312,6 +318,7 @@ void loop() {
     //lost sequence to tell owner come back
     Lost_sequence();
     lost();
+    
   }
 
   if (distSR < 25 & distSL > 25) {
@@ -322,6 +329,7 @@ void loop() {
     //lost sequence to tell owner come back
     Lost_sequence();
     lost();
+    Serial.print("backward, look for person ");
   }
 
 }
@@ -329,7 +337,7 @@ void loop() {
 
 
 ////////////////
-///Logic Functions
+///Logic Functions 
 
 
 
@@ -376,7 +384,7 @@ void Lost_sequence()
      see_val = digitalRead(PIRPin);
 
     return see_val;
-
+   
     }
 
 
@@ -492,7 +500,7 @@ void Lost_sequence()
     //Turn on motor A
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
-
+  
     analogWrite(enA,50);
     delayMicroseconds(10);
     analogWrite(enA,100);
@@ -520,7 +528,7 @@ void Lost_sequence()
 
 
 
-
+   
 
 
   //
