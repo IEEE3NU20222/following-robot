@@ -198,7 +198,7 @@ void loop() {
   else {
     if (pirState == HIGH){
       // we have just turned of
-      Serial.println("Motion ended!");
+      Serial.println("Ready to detect motion again!");
       // We only want to print on the output change, not state
       pirState = LOW;
     }
