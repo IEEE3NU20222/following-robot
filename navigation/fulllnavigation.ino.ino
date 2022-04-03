@@ -468,7 +468,7 @@ void Lost_sequence()
 
     //Turn on motor A
     digitalWrite(in1, LOW);
-    digitalWrite(in2, HIGH);
+    digitalWrite(in2, LOW);
 
     analogWrite(enA,50);
     delayMicroseconds(10);
@@ -480,8 +480,8 @@ void Lost_sequence()
 
 
     //Turn on motor B
-    digitalWrite(in1, HIGH);
-    digitalWrite(in2, LOW);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
 
 
     analogWrite(enB,50);
@@ -512,7 +512,7 @@ void Lost_sequence()
 
     //Turn on motor B
     digitalWrite(in1, LOW);
-    digitalWrite(in2, HIGH);
+    digitalWrite(in2, LOW);
 
 
     analogWrite(enB,50);
